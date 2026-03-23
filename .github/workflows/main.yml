@@ -1,7 +1,5 @@
-# 工作流名称
 name: Scheduled Python Task (9:25 Daily)
 
-# 触发条件：定时 + 手动触发
 on:
   schedule:
     # 北京时间9:25 → UTC 1:25
@@ -12,22 +10,19 @@ jobs:
   run-python-script:
     runs-on: ubuntu-latest
     steps:
-      # 步骤1：拉取仓库代码
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      # 步骤2：设置Python环境
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'  # 可根据你的代码调整版本
+          python-version: '3.10'  # 兼容pandas的稳定版本
 
-      # 步骤3：安装依赖（核心修复：添加requests安装）
+      # 仅安装需要的第三方库：requests + pandas
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip  # 升级pip
-          pip install requests  # 安装requests库
+          python -m pip install --upgrade pip
+          pip install requests pandas
 
-      # 步骤4：执行代码（你的send1.py）
       - name: Run Python script (send1.py)
         run: python send1.py
