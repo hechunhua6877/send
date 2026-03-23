@@ -35,4 +35,4 @@ jobs:
 
       # 步骤4：执行Python代码（替换为你的文件名，比如main.py）
       - name: Run Python script at 9:25 (Beijing Time)
-        run: python main.py
+        run: python send1.py
